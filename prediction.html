@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnostic Analysis Assessment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+    <div class="container my-5" style="max-width: 800px;">
+        {% if emergency %}
+            <div class="alert alert-danger p-4 text-center shadow-sm" role="alert">
+                <h1 class="display-5 fw-bold mb-3">🚨 Emergency Alert</h1>
+                <p class="fs-5">{{ message }}</p>
+                <hr>
+                <p class="mb-0 fw-semibold text-dark">Please dial emergency dispatchers immediately.</p>
+            </div>
+        {% else %}
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white text-center py-3"><h3>Diagnostic Engine Output Assessment</h3></div>
+                <div class="card-body p-4">
+                    <h5>Patient Metrics Summary</h5>
+                    <p>Age: <strong>{{ profile.age }}</strong> | Gender: <strong>{{ profile.gender }}</strong> | Calculated BMI: <strong>{{ result.bmi }}</strong></p>
+                    <hr>
+
+                    <h5 class="text-secondary">Predicted Likely Conditions (Top Predictions)</h5>
+                    <ul class="list-group mb-4">
+                        {% for item in result.predictions %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>{{ item.disease }}</strong>
+                                <span class="badge bg-primary rounded-pill fs-6">{{ item.probability }}% Match</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="row mb-4 text-center">
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded {{ 'bg-danger-subtle' if result.risk_level == 'High' else 'bg-warning-subtle' if result.risk_level == 'Medium' else 'bg-success-subtle' }}">
+                                <h6>Calculated Risk Vector Status</h6>
+                                <h4><strong>{{ result.risk_level }}</strong></h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded bg-info-subtle">
+                                <h6>Recommended Healthcare Specialist</h6>
+                                <h4><strong>{{ result.specialist }}</strong></h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5>Care Protocols & Guidelines</h5>
+                    <ul>
+                        {% for entry in result.precautions %}
+                            <li>{{ entry }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="alert alert-warning mt-4 d-flex align-items-center" role="alert">
+                        <div>
+                            <strong>💊 Informational Medication Database Reference:</strong> {{ result.medicine_info }}. <br>
+                            <small class="text-muted">Disclaimer: All generated values serve solely informational/educational guidance tracking metrics. Consult certified clinicians before processing active drug prescriptions.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="text-center"><a href="/" class="btn btn-secondary px-4">Evaluate New Session Profile</a></div>
+    </div>
+</body>
+</html>

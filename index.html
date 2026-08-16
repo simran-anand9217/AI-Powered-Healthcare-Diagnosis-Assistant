@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Diagnostics Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjH3QslPWMTI2rnsSLxcpvchDuQo8RC5xueNcXGLksus8WzrTg4vyj" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+    <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>AI-Powered Healthcare Diagnosis Assistant</h2>
+            <a href="/history" class="btn btn-outline-primary">View Diagnosis History</a>
+        </div>
+        
+        <div class="card shadow-sm p-4">
+            <form action="/" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-2">
+                        <label class="form-label" for="age">Age</label>
+                        <input type="number" name="age" id="age" class="form-control" required min="1">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label" for="gender">Gender</label>
+                        <select name="gender" id="gender" class="form-select">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label" for="weight">Weight (kg)</label>
+                        <input type="number" step="0.1" name="weight" id="weight" class="form-control" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label" for="height">Height (cm)</label>
+                        <input type="number" step="0.1" name="height" id="height" class="form-control" placeholder="e.g. 175" required min="50" max="250">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="temperature">Temperature (°C)</label>
+                        <input type="number" step="0.1" name="temperature" id="temperature" class="form-control" required>
+                    </div>
+                </div>
+
+                <h4 class="mb-3">Select Exhibited Symptoms</h4>
+                <div class="row row-cols-2 row-cols-md-4 g-3 mb-4">
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" name="symptoms" value="fever" id="f"><label class="form-check-label" for="f">Fever</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" name="symptoms" value="cough" id="c"><label class="form-check-label" for="c">Cough</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" name="symptoms" value="headache" id="h"><label class="form-check-label" for="h">Headache</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" name="symptoms" value="fatigue" id="fa"><label class="form-check-label" for="fa">Fatigue</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" name="symptoms" value="vomiting" id="v"><label class="form-check-label" for="v">Vomiting</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" name="symptoms" value="chest_pain" id="cp"><label class="form-check-label" for="cp">Chest Pain</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" name="symptoms" value="breathing_difficulty" id="bd"><label class="form-check-label" for="bd">Breathing Difficulty</label></div></div>
+                    <div class="col"><div class="form-check"><input class="form-check-input" type="checkbox" name="symptoms" value="rash" id="r"><label class="form-check-label" for="r">Rash</label></div></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Run Diagnostic Assessment</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

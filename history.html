@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Logs Archive</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+    <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Diagnostic Evaluation Records Ledger</h2>
+            <a href="/" class="btn btn-primary">Return to Assessment Platform</a>
+        </div>
+        <div class="card shadow-sm p-4">
+            <table class="table table-striped align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Timestamp Log</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Top Predicted Condition</th>
+                        <th>Probability Match</th>
+                        <th>Risk Categorization</th>
+                        <th>Routed Specialist</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in records %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td><strong>{{ row[3] }}</strong></td>
+                        <td>{{ row[4] }}%</td>
+                        <td><span class="badge {{ 'bg-danger' if row[5] == 'High' else 'bg-warning text-dark' if row[5] == 'Medium' else 'bg-success' }}">{{ row[5] }}</span></td>
+                        <td>{{ row[6] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
